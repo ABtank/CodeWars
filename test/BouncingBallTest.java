@@ -1,7 +1,7 @@
-import static org.junit.Assert.*;
-import java.util.Random;
 import org.junit.Test;
 import ru.abramov.codewars.BouncingBall;
+
+import static org.junit.Assert.assertEquals;
 
 
 public class BouncingBallTest {
