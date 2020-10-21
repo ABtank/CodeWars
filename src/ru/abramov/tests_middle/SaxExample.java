@@ -7,14 +7,18 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
+//Тестовое задание:
+//        Необходимо сделать парсер входного файла в формате xml
+//        и подготовить данные из него для вставки в реляционную
+//        базу данных (разворачивание структуры в строку таблицы)
+//        Пример файла для парсинга: template.xml
+
 
 public class SaxExample {
     private static Set<String> set = new LinkedHashSet();
-    private static HashMap<String,Integer> hashMap =new HashMap<>();
+    private static HashMap<String,Integer> hashMap =new LinkedHashMap<>();
     private static int count=0;
 
     public static void main(String args[]) {
@@ -37,7 +41,7 @@ public class SaxExample {
                     // Если тэг имеет имя NAME, то мы этот момент отмечаем - начался тэг NAME
                     set.add(qName);
                     searchDuplicate(qName);
-                    if (qName.equalsIgnoreCase("d:Description")) {
+                    if (qName.equalsIgnoreCase("id")) {
                         name = true;
                     }
                 }
@@ -47,7 +51,8 @@ public class SaxExample {
                 public void characters(char ch[], int start, int length) throws SAXException {
                     // Если перед этим мы отметили, что имя тэга NAME - значит нам надо текст использовать.
                     if (name) {
-                        System.out.println("Name: " + new String(ch, start, length));
+                        count++;
+//                        System.out.println("Name "+ "#"+ count+" : " + new String(ch, start, length));
                         name = false;
                     }
                 }
